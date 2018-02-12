@@ -3,43 +3,71 @@
 <head>
 	<title>test</title>
 </head>
+
+<style>
+	body {
+		margin:none;
+	}
+	.container {
+		width:100vw;
+		height:100vh;
+		position:absolute;
+		background-color:orange;
+		top:0;
+		left:0;
+	}
+
+	.red {
+		background-color:red;
+	}
+
+	.blue {
+		background-color:blue;
+	}
+</style>
+
 <body>
 
-<!-- <?php 
-
-	$myName = $_GET['name'];
-
-?>
-
-<p>Call me <?php echo $myName ?>. Some years ago - never mind how long precisely - having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world. It is a way I have of driving off the spleen and regulating the circulation. Whenever I find myself growing grim about the mouth; whenever it is a damp, drizzly November in my soul; whenever I find myself involuntarily pausing before coffin warehouses, and bringing up the rear of every funeral I meet; and especially whenever my hypos get such an upper hand of me, that it requires a strong moral principle to prevent me from deliberately stepping into the street, and methodically knocking people's hats off - then, I account it high time to get to sea as soon as I can. This is my substitute for pistol and ball. With a philosophical flourish Cato throws himself upon his sword; I quietly take to the ship. There is nothing surprising in this. If they but knew it, almost all men in their degree, some time or other, cherish very nearly the same feelings towards the ocean with me.</p>
- -->
-
- 
 <?php
-
-	$letter = $_GET['letter'];
 	$number = $_GET['number'];
-	$delay = $_GET['delay'];
-	$delayvalue = $delay*250000;
 
-	$counter = 1;
-
-	echo "hello ";
-	flush();
-	usleep($delayvalue);
-	while ($counter<=$number){
-		echo "$letter ";
-		$counter++;
-		usleep($delayvalue);
-		// system(escapeshellcmd("say $letter"));
-		flush();
+	if(isset($number) && !empty($number) && is_numeric($number)){
+			if ($number <=10){
+				// turn page blue
+				echo '<div class="container blue">';
+			} else if ($number > 10){
+				// turn page red
+				echo '<div class="container red">';
+			}
+	} else {
+		echo '<div class="container">';
 	}
-	usleep($delayvalue);
-	echo "goodbye ";
+
+	
 ?>
 
+<!-- <?php
+	// $number = $_GET['number'];
+	// if ($number > 0 & $number <=10){
+	// 	// turn page blue
+	// 	echo '<div class="container blue">';
+	// } else if ($number > 10){
+	// 	// turn page red
+	// 	echo '<div class="container red">';
+	// } else {
+	// 	echo '<div class="container">';
+	// }
+?> -->
 
-
+</div>
 
 </body>
 </html>
+
+<!-- 
+	// = assigns value
+	// == asks if it's equal. questions... is operator
+	// look up php compairson operators...
+	// if (condition is true){
+	// 		run this
+	// } -->
