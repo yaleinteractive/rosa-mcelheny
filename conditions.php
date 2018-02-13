@@ -2,29 +2,28 @@
 <html>
 <head>
 	<title>test</title>
+	<style>
+		body {
+			margin:none;
+		}
+		.container {
+			width:100vw;
+			height:100vh;
+			position:absolute;
+			background-color:orange;
+			top:0;
+			left:0;
+		}
+
+		.red {
+			background-color:red;
+		}
+
+		.blue {
+			background-color:blue;
+		}
+	</style>
 </head>
-
-<style>
-	body {
-		margin:none;
-	}
-	.container {
-		width:100vw;
-		height:100vh;
-		position:absolute;
-		background-color:orange;
-		top:0;
-		left:0;
-	}
-
-	.red {
-		background-color:red;
-	}
-
-	.blue {
-		background-color:blue;
-	}
-</style>
 
 <body>
 
@@ -42,8 +41,6 @@
 	} else {
 		echo '<div class="container">';
 	}
-
-	
 ?>
 
 <!-- <?php
