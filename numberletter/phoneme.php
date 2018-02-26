@@ -2,11 +2,18 @@
 <html>
 <head>
 	<title>test</title>
-	<style>
-		img {
-			width:<?php echo $width ?>;
-		}
-	</style>
+<!-- 	<style>
+
+	.fade {
+		animation-name:fade;
+	}
+
+	@keyframes fade {
+		from {opacity:1;}
+		to {opacity:2;}
+	}
+
+	</style> -->
 </head>
 <body>
  
@@ -16,30 +23,10 @@
 	$number = $_GET['number'];
 
 	$width = $number*10;
-	// $delay = $_GET['delay'];
-	// $delayvalue = $delay*250000;
+	$widthpx = $width."px";
+	echo "<img style='width:$widthpx;' src='assets/$letter.jpg'>";
 
-	// $counter = 1;
-
-	// echo "hello ";
-	// flush();
-	// usleep($delayvalue);
-	// while ($counter<=$number){
-	// 	echo "$letter ";
-	// 	$counter++;
-	// 	usleep($delayvalue);
-	// 	// system(escapeshellcmd("say $letter"));
-	// 	flush();
-	// }
-	// usleep($delayvalue);
-	// echo "goodbye ";
-	// echo "$letter";
-
-	echo "<img src='assets/$letter.jpg'>";
 ?>
-
-
-
 
 </body>
 </html>
