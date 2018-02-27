@@ -3,17 +3,24 @@
 <head>
 	<title>test</title>
 	<style>
-/*		body {
-			background-color:blue;
-		}*/
+		body {
+			margin:0;
+			overflow:hidden;
+		}
 		.fade {
 			animation-name:fade;
 			animation-iteration-count: infinite;
 			animation-direction:alternate;
+			animation-delay:0s;
 		}
 		@keyframes fade {
 			from {opacity:1;}
 			to {opacity:0;}
+		}
+
+		img {
+			width:20vw;
+			float:left;
 		}
 
 	</style>
@@ -36,14 +43,20 @@
 	$number = $_GET['number'];
 	$counter = 1;
 	$duration = (100/$number)."s";
+	$width = (1000/$number).'px';
 
-	while ($counter <= $number) {
-			$delay = $counter.'s';	
-			echo "<img class='fade' id='$counter' src='assets/$letter.jpg'>";
-			echo "<head> <style> #$counter {animation-duration:$duration;}</style> </head>";
+
+	while ($counter <= 50) {
+			$delay = ($counter/25).'s';
+			$id = 'img'.$counter;
+			echo "<head><style> img {animation-duration:$duration; width:$width} #$id {animation-delay:$delay;}</style></head>";
+			echo "<img class='fade' id='$id' src='assets/$letter.jpg'>";
 			$counter++;
 		};
 
 ?>
 </body>
 </html>
+
+
+<!-- echo "<head> <style> img {animation-duration:$duration;} #$id {animation-delay:$delay;}</style> </head>"; -->
