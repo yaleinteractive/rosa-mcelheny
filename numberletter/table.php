@@ -69,7 +69,6 @@
 	<body>
 		 
 		<?php
-
 			$number = $_GET['number'];
 			$letter = $_GET['letter'];
 			$counter = 1;
@@ -82,26 +81,27 @@
 			if(!isset($number) || empty($number) || !is_numeric($number)){
 				$number = 1;
 			};
-
 			if(!isset($letter) || empty($letter) || !ctype_alpha($letter)){
 				$letter = a;
 			};
+
+			// make a table, this is a link
 				echo "<a href='table.php?number=$numberinc&letter=$letter'><table>";
 						while ($counter <= $number) {
 
 							echo "<head><style> .item {animation-duration:$duration;}</style></head>";
 							echo "<tr>";
 								while ($cellcounter <= $number){
-									$delay = ($cellcounter/2).'s';
-									echo "<head><style>#$cellid {animation-delay:$delay;}</style></head>"; 
-									echo "<td class='item $letter' id='$cellid'></td>";
+									$delay = ($cellid/$number).'s';
+									$id = 'img'.$cellid;
+									echo "<head><style>#$id {animation-delay:$delay;}</style></head>"; 
+									echo "<td class='item $letter' id='$id'></td>";
 									$cellcounter++;
 									$cellid++;
 								};
 							echo "</tr>";
 							$cellcounter = 1;	
 							$counter++;
-
 						};
 				echo "</table></a>";
 		?>
