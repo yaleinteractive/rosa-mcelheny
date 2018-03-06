@@ -14,16 +14,38 @@
         height:10vh;
       }
 
+      .formbox {
+        position:fixed;
+        bottom:0px;
+        left:0;
+        width:100vw;
+        height:25px;
+        background-color:black;
+        z-index:100;
+      }
+
       form {
         position:fixed;
         bottom:5px;
         left:10px;
+        padding:2px;
       }
 
       input {
+
         width:50px;
-        background-color:orange;
-        border:black;
+        border:white 1px;
+        outline:none;
+        background-color:darkgray;
+      }
+
+      input:focus {
+        color:initial;
+        outline:none;
+      }
+
+      .button {
+        background-color:gray;
       }
 
       .item {
@@ -79,8 +101,10 @@
        
         // go through table array
         for ($i = 0; $i < $tableLength ; $i++){
+            
             // on each time, if letter is not the same as the item in the array, put in an image that corresponds to the array item.
 
+            // delay is the number in the array; goes up by one, and resets when you get to the right letter...
             $delay = $i.'s';
 
             if ($letter != $table[$i]) {
@@ -106,14 +130,15 @@
       
   ?>
 
-<form name="form" action="" method="get">
-    <input type="text" name="letter" maxlength="1" >
-    <input type="text" name="number" maxlength="2" >
-    <a href="table.php"><input type="submit"></a>
-</form>
+  <div class="formbox">
+    <form name="form" action="" method="get">
+        <input type="text" name="letter" maxlength="1" >
+        <input type="text" name="number" maxlength="2" >
+        <a href="table.php"><input class="button" type="submit"></a>
+    </form>
+  </div>
 
-  <!-- i+=2; use this for going through by 2; odd or even #s... -->
-    
+
 </body>
 
 </html>
