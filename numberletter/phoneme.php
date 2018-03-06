@@ -43,10 +43,10 @@
 	$number = $_GET['number'];
 	$counter = 1;
 	$duration = (100/$number)."s";
-	$width = (1000/$number).'px';
+	$width = (10000/$number).'px';
 
 
-	while ($counter <= 50) {
+	while ($counter <= $number) {
 			$delay = ($counter/25).'s';
 			$id = 'img'.$counter;
 			echo "<head><style> img {animation-duration:$duration; width:$width} #$id {animation-delay:$delay;}</style></head>";
@@ -55,6 +55,11 @@
 		};
 
 ?>
+<script>
+	window.onmouseenter = function(){
+		document.getElementbyClass('fade').css('animation-play-state', 'paused');
+	};
+</script>
 </body>
 </html>
 
