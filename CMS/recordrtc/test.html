@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+<!--     <link rel="stylesheet" href="style.css" type="text/css"> -->
+    <script src="https://webrtcexperiment-webrtc.netdna-ssl.com/RecordRTC.js"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.9/howler.js"></script>
+    <!-- <script src="client.js"></script> -->
+    <style>
+      #recordStartBtn {
+        display: none
+      }
+
+      #recordStopBtn {
+        display: none
+      }
+
+      #statusMsg {
+        height: 5em;
+      }
+
+      #audio-cont div {
+        margin: 1em;
+      }
+
+      #audio-cont audio {
+        width: 300px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h5>
+      Recording Controls
+    </h5>
+    <div>
+      <button id="recordPermBtn">Request Permission</button>
+      <button id="recordStartBtn">Start Recording</button>
+      <button id="recordStopBtn">Stop Recording</button>
+      <p id="statusMsg"></p>
+    </div>
+
+    <h5>
+      Recording History with Playback
+    </h5>
+    <div id="audio-cont">
+    </div>
+    <script>
+      window.onload = function() {
+        let isRecording = false
+        let permGranted = false
+
+        let recordPermBtn = document.getElementById('recordPermBtn')
+        let recordStartBtn = document.getElementById('recordStartBtn')
+        let recordStopBtn = document.getElementById('recordStopBtn')
+
+        let statusMsgEl = document.getElementById('statusMsg')
+        let audioEl = document.getElementById('audioEl')
+
+        let audioStream = null
+
+        window.AudioContext = window.AudioContext || window.webkitAudioContext
+        let recordRTC = null
+        let mediaConstraints = {audio: true}
+
+        recordPermBtn.addEventListener('click', onRecordPermBtnClick)
+        recordStartBtn.addEventListener('click', onRecordStartBtnClick)
+        recordStopBtn.addEventListener('click', onRecordStopBtnClick)
+
+        function onRecordPermBtnClick() {
+          statusMsgEl.innerHTML = 'Requesting permission...'
+          // The first call to this will trigger the permissions prompt
+          createNewAudioStream().then(() => {
+              statusMsgEl.innerHTML += 'granted.<br>'
+              recordPermBtn.style.display = 'none'
+              recordStartBtn.style.display = 'block'
+              // We can not start recording here. Doing so results in an invalid 44k audio file on ios. The start
+              // recording event seemingly must be started with another user event.    
+            })
+            .catch(errorCallback)
+        }
+
+        function createNewAudioStream() {
+          return navigator.mediaDevices.getUserMedia(mediaConstraints)
+            .then((newAudioStream) => {
+              audioStream = newAudioStream
+            })
+        }
+
+      function onRecordStartBtnClick() {
+        recordStartBtn.disabled = true
+        recordStartBtn.style.display = 'none'
+        recordStopBtn.style.display = 'block'
+
+        statusMsgEl.innerHTML = ''
+
+        const options = {
+          type: 'audio'
+        }
+
+        recordRTC = RecordRTC(audioStream, options)
+        recordRTC.startRecording()
+        statusMsgEl.innerHTML += 'Recording...'
+      }
+
+
+      function onRecordStopBtnClick() {
+        recordRTC.stopRecording(function(audioURL) {
+          statusMsgEl.innerHTML += 'stopped.<br>'
+          recordStartBtn.style.display = 'block'
+          recordStartBtn.disabled = false
+          recordStopBtn.style.display = 'none'
+
+          // let recordedBlob = recordRTC.getBlob()   
+          // audioEl.type = recordedBlob.type
+          // audioEl.src = audioURL
+
+          const audioEl2Div = document.createElement('div')
+          document.getElementById('audio-cont').appendChild(audioEl2Div);
+
+          const audioEl2 = document.createElement('audio')
+          audioEl2.controls = true
+          audioEl2.src = audioURL
+          audioEl2Div.appendChild(audioEl2);
+
+          // This is what allows multiple recordings on iOS. This triggers
+          // the getUserMedia to create another audiostream. We can call it
+          // here because we are still in a user event context. Because permission
+          // has already been granted previously, user will not be reprompted.
+          // Without doing this (and so reusing the same audiostream), everything
+          // will appear to work, but the resulting audio will be silent on ios.    
+          createNewAudioStream()
+        })
+      }
+
+     // setTimeout(onRecordStopBtnClick, 1000);
+
+
+      function errorCallback(error) {
+        console.log('error', error)
+        statusMsgEl.innerHTML = statusMsgEl.innerHTML + '<br>Error. Message: ' + error
+      }
+      }
+
+      
+    </script>
+  </body>
+
+</html>

@@ -1,6 +1,8 @@
+
 <html>
 <head></head>
 <body>
+    
     <?php
 
     // sequel connection info is in variables...
@@ -23,7 +25,7 @@
 
     // this is the command we want to run; events is the name of the table
     // define query
-    // SELECT * from Table
+    // SELECT * from [tablename] * means all
     // $sql = "SELECT id, date, title, description FROM events ORDER by date";
     // specify the order... ASC = Ascending; DESC = descending
     $sql = "SELECT * FROM events ORDER by date DESC, time DESC";
@@ -62,6 +64,24 @@
     };
     $conn->close();
     ?>
+
+    <h2>Add an event</h2>
+
+<!-- surround input with label tag -->
+<!-- input tags are built-in form widgets
+also file upload type -->
+<!-- value = default value that's there. should be existing value, if you're editing something.
+submit button is special. when you click it you submit the form
+makes a request to a url with all of the data. -->
+    <form>
+        <label>Title <input type="text" name="title"></label><br>
+        <label>Date <input type="date" name="date"></label><br>
+        <label>Time <input type="time" name="time"></label><br>
+        <label>Description<br>
+        <textarea name="description"></textarea></label><br>
+        <input type="sumbit" value="add">
+<!--         <input type="sumbit" value="add">
+ -->    </form>
 
 </body>
 </html>
