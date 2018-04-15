@@ -10,6 +10,8 @@
 		$type = $row['type'];
 		if ($type === 'image') {
 			echo '<script type="text/javascript">window.location = "audio.html"</script>';
+
+			
 		} if ($type === 'audio') {
 			echo '<script type="text/javascript">window.location = "image.php"</script>';
 		}
