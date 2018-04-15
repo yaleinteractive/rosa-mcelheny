@@ -18,7 +18,7 @@
 </div>
 
 
-	<script src="./Mp3LameEncoder.js"></script>
+	<script src="js/Mp3LameEncoder.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script class="containerScript">
 		window.URL = window.URL || window.webkitURL;
@@ -34,11 +34,6 @@
 		stopBtn.onclick = recorder.stopRecord;
 
 		function RecordVoiceAudios() {
-			// let elementVolume = document.querySelector('.js-volume');
-			// let ctx = elementVolume.getContext('2d');
-			// let codeBtn = document.querySelector('.js-code');
-			// let pre = document.querySelector('pre');
-			// let downloadLink = document.getElementById('download');
 			let audioElement = document.querySelector('audio');
 			let encoder = null;
 			let microphone;
@@ -133,11 +128,11 @@
 
 				};
 
-				// analizer(audioContext);
 			}
 
 			this.stopRecord = function() {
 				stopBtnRecord();
+				window.location = "archive.php";
 			};
 
 			// let analizer = (context) => {
