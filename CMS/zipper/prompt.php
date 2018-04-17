@@ -6,14 +6,13 @@
 	$result = $conn->query($sql);
 
 	while($row = $result->fetch_assoc()) {
-		echo $row['type'];
+		// echo $row['type'];
 		$type = $row['type'];
 		if ($type === 'image') {
-			echo '<script type="text/javascript">window.location = "audio.html"</script>';
-
+			include "audio_prompt.php";
 			
 		} if ($type === 'audio') {
-			echo '<script type="text/javascript">window.location = "image.php"</script>';
+			include "image_prompt.php";
 		}
 	}
 

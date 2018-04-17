@@ -1,0 +1,200 @@
+.archive_page {
+	margin:0;
+}
+
+@font-face {
+  font-family: "Monosten";
+  src: url("assets/Monosten A.ttf");
+}
+
+.container {
+	width:100vw;
+	height:100vh;
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	justify-content: space-around;
+}
+
+.instruction {
+	font-family:"Monosten";
+	width:300px;
+	margin:0px 20px 20px 20px;
+	text-align:center;
+}
+
+.button {
+	font-family:"Monosten";
+    border: 2px dashed red;
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+	margin:20px;
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	justify-content: center;
+	cursor:pointer;
+}
+
+/*for images on the audio prompt page*/
+.prompt_image {
+	width:300px;
+	margin:20px;
+}
+
+audio {
+	width:300px;
+	display:none;
+}
+
+.audio_prompt {
+	display:block;
+	padding:20px;
+}
+
+.js-stop {
+	display:none;
+	background-color:red;
+	color:white;
+}
+
+.arrow {
+	width:64px;
+	height:50px;
+	position:relative;
+}
+
+.line {
+	position: absolute;
+	width: 100%;
+	height: 4px;
+	top: 22px;
+	background-color: red;
+	z-index: 100;
+}
+
+.diag {
+    position: absolute;
+    width: 33px;
+    height: 4px;
+    transform: rotate(45deg);
+    top: 11px;
+    right: -5px;
+    background-color: red;
+}
+
+.down {
+	transform:rotate(-45deg);
+    top: 33px;
+}
+
+
+.audio {
+	background-color:blue;
+	width:800px;
+	height:800px;
+	margin:20px;
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.arrow-right {
+  	width: 0; 
+  	height: 0; 
+	border-top: 100px solid transparent;
+	border-bottom: 100px solid transparent;
+	border-left: 155px solid white;
+	margin-left: 55px;
+}
+
+.paused {
+    width: 80px;
+    height: 180px;
+    border-left: 50px solid white;
+    border-right: 50px solid white;
+    display:none;
+}
+
+.archive {
+	width:100vw;
+	height:100vh;
+	margin:0px;
+}
+
+/*for images on the archive page*/
+.archive_image {
+	width:100%;
+	height:100%;
+	margin:0px;
+	object-fit:cover;
+}
+
+#form {
+	position:fixed;
+	top:-1000px;
+}
+
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2) { 
+
+  	.instruction {
+  		width:750px;
+  		font-size:80px;
+  	}
+
+  	.prompt {
+  		font-size:40px;
+  	}
+
+  	.button {
+  		width:300px;
+  		height:300px;
+  	}
+
+  	.arrow {
+		width:163px;
+		height:200px;
+		position:relative;
+	}
+
+	.line {
+		position: absolute;
+		width: 100%;
+		height: 4px;
+		top: 98px;
+		background-color: red;
+		z-index: 100;
+	}
+
+	.diag {
+       	position: absolute;
+	    width: 75px;
+	    height: 4px;
+	    transform: rotate(45deg);
+	    top: 70px;
+	    right: -8px;
+	    background-color: red;
+	}
+
+	.down {
+		transform:rotate(-45deg);
+	    top: 126px;
+	}
+
+	.audio_prompt {
+		display:block;
+		margin-bottom:200px;
+		margin-left:200px;
+	}
+
+	.prompt_image {
+		width:700px;
+		margin:20px 0px 20px 0px;
+	}
+
+}

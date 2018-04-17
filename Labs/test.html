@@ -1,0 +1,25 @@
+<html>
+
+<body>
+	<div class="content"> </div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+		$('body').keypress(function(event){
+			var x = event.key;
+			console.log(x);
+			// $('.instruction').hide();
+
+	// FIRST ROW OF KEYS		
+				if (x == 'a') {
+					$('.content').append("<span>Test</span>");
+				} if (x =='x') {
+					$( "span" ).last().remove();
+				}
+  
+		})
+
+
+	</script>
+
+</body>
+</html>

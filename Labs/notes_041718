@@ -1,0 +1,14 @@
+action = create.php in a form; submits form data to another php file
+
+$date = strtotime() == use this to make a string value into a date in unix epoch
+
+time() = returns current time in unix epoch
+
+use value attribute in input field to put in a default
+
+<?= $date ?> = means just echo the variable; shortcut for outputting a variable
+
+you can use a type=hidden with an input so that it still passes it but it's not visible or editable
+
+make a readme that describes the different pages
+
