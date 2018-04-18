@@ -118,10 +118,25 @@ audio {
     display:none;
 }
 
+/*for archive page*/
 .archive {
 	width:100vw;
 	height:100vh;
 	margin:0px;
+	display:none;
+}
+
+/*for play button on archive page*/
+.play {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: center;
 }
 
 /*for images on the archive page*/

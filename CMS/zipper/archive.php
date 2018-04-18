@@ -5,6 +5,13 @@
 </head>
 
 <body class='archive_page'>
+
+    <div class="play">
+        <div class="playbutton">
+            <div class='arrow-right'></div>
+            <div class='paused'></div>
+        </div>
+    </div>
 	<div class='content'>
 		<?php
 
@@ -31,33 +38,44 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 
-	// show first item
-	// if it is audio, make it autoplay
-	// if it is image, make it show for 3s
-	// when first item is finished, show second item
-	// then show second item
+	$(document).ready(function() {
 
-    // make array of everything in the content div
-    var items = $( ".archive" ).toArray();
-    console.log(items);
+    $('.content .archive').first().show();
 
+    var next_item = function() {
+        var items = $( ".archive" ).toArray();
+        var number = items.length;
+        console.log(number);
+        if (number >= 1) {
+            var $item = $('.content .archive').first();
+            $item.show();
+            if ($item.hasClass('image')) {
+                setTimeout(function() {
+                    $item.remove();
+                    next_item();
+                }, 2000);
+            }
+            if ($item.hasClass('audio')) {
+                audio = $item.find('audio').get(0);
+                audio.play();
+                $(audio).on('ended', function() {
+                    $item.remove();
+                    next_item();
+                });
+            }
+        } if (number === 0) {
+            window.location = 'index.php';
+        }
+    }
 
-    // what to do to an image
-    // function showimage(this) {
-    // 	this.show();
-    // 	setTimeout(function(){ this.hide(); }, 3000);
-    // }
+    $('.play').click( function(){
+        $(this).hide();
+        next_item();
+    });
+    // next_item();
 
-    // what to do to an audio file
-    // function playaudio() {
-    // 	$(this).play();
+    });
 
-    // }
-  
-    
-
-    // TO DO - print the timestamp with each image
-    
   </script>
 </body>
 </html>

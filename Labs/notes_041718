@@ -12,3 +12,7 @@ you can use a type=hidden with an input so that it still passes it but it's not 
 
 make a readme that describes the different pages
 
+
+make a new mysql database; give it asecure password
+update connect.php so that it has the new user/password
+and make sur uploads are going to the right place.

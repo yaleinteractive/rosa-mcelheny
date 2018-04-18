@@ -1,0 +1,43 @@
+In PHP, output all the images and audios like this
+
+<style>
+	.playlist .item {
+	   display: none;
+	}
+</style>
+
+<div class="playlist">
+	<div class="item image">
+	  <img src="...">
+	</div>
+	<div class="item audio">
+	  <audio src="...">
+	</div>
+	...
+</div>
+
+In JavaScript with jQuery
+
+$(document).ready(function() {
+
+	var next_item = function() {
+		var $item = $('.playlist .item').first();
+		$item.show();
+		if ($item.hasClass('image')) {
+			setTimeout(function() {
+				$item.remove();
+				next_item();
+			}, 2000);
+		}
+		else {
+			audio = $item.find('audio').get(0);
+			audio.play();
+			$(audio).on('ended', function() {
+				$item.remove();
+				next_item();
+			});
+		}
+	}
+	
+
+});
