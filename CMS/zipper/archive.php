@@ -7,12 +7,18 @@
 
 <body class='archive_page'>
 
+
+
     <div class="play">
-        <div class="playbutton">
-            <div class='arrow-right'></div>
-            <div class='paused'></div>
+        <div class='instruction'>Play it back!</div>
+
+       <div class="playbutton">
+<!--             <div class="button"> -->
+                <div class='arrow-right'></div>
+<!--             </div> -->
         </div>
     </div>
+
 
 	<div class='content'>
 		<?php
@@ -43,9 +49,10 @@
     		}
 		?>
 	</div>
+    <audio id='player'></audio>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
 
 	$(document).ready(function() {
 
@@ -63,40 +70,46 @@
             console.log(color)
         };
 
-        // if on mobile, audio playback must be triggered by click event.
+        // if on mobile, audio playback is reconfigured.
         // on desktop, audio plays back automatically.
         if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
                 var next_item = function() {
-                    var items = $( ".archive" ).toArray();
-                    var number = items.length;
-                    console.log(number);
+
+                // this is the audio file that will play the tracks as the sources change.
+                var audio_player = $('#player').get(0);
+
+                // put all the archive items in an array, count the length
+                var items = $( ".archive" ).toArray();
+                var number = items.length;
+                console.log(number);
+
+                // if there is at least one archive item, do this function
                     if (number >= 1) {
                         var $item = $('.content .archive').first();
                         $item.show();
                         if ($item.hasClass('image')) {
+                            $(audio_player).attr('src', 'sounds/0.mp3');
+                            audio_player.play();
                             setTimeout(function() {
                                 $item.remove();
                                 next_item();
-                                audio_colors();
                             }, 2000);
-                        }
-                        if ($item.hasClass('audio')) {
-                            audio = $item.find('audio').get(0);
-                            $('.play').show();
-                            $('.play').click( function(){
-                                $(this).hide();
-                                audio.play();
-                            });
-                            $(audio).on('ended', function() {
+                        } if ($item.hasClass('audio')) {
+                            // find the audio element, and get it's source.
+                            audio = $item.find('audio').attr('src');
+                            // replace the audio_player source with the new audio. play it, and then 
+                            $(audio_player).attr('src', audio);
+                            audio_player.play();
+                            $(audio_player).on('ended', function() {
                                 $item.remove();
                                 next_item();
-                                audio_colors();
                             });
                         }
                     } if (number === 0) {
                         window.location = 'archive_index.php';
                     }
                 }
+
                 $('.play').click( function(){
                     $(this).hide();
                     next_item();
@@ -105,30 +118,30 @@
         else {
             console.log('desktop');
             var next_item = function() {
-            var items = $( ".archive" ).toArray();
-            var number = items.length;
-            console.log(number);
-            audio_colors();
-            if (number >= 1) {
-                var $item = $('.content .archive').first();
-                $item.show();
-                if ($item.hasClass('image')) {
-                    setTimeout(function() {
-                        $item.remove();
-                        next_item();
-                    }, 2000);
+                var items = $( ".archive" ).toArray();
+                var number = items.length;
+                console.log(number);
+                audio_colors();
+                if (number >= 1) {
+                    var $item = $('.content .archive').first();
+                    $item.show();
+                    if ($item.hasClass('image')) {
+                        setTimeout(function() {
+                            $item.remove();
+                            next_item();
+                        }, 2000);
+                    }
+                    if ($item.hasClass('audio')) {
+                        audio = $item.find('audio').get(0);
+                        audio.play();
+                        $(audio).on('ended', function() {
+                            $item.remove();
+                            next_item();
+                        });
+                    }
+                } if (number === 0) {
+                    window.location = 'archive_index.php';
                 }
-                if ($item.hasClass('audio')) {
-                    audio = $item.find('audio').get(0);
-                    audio.play();
-                    $(audio).on('ended', function() {
-                        $item.remove();
-                        next_item();
-                    });
-                }
-            } if (number === 0) {
-                window.location = 'archive_index.php';
-            }
             }
 
             $('.play').click( function(){
