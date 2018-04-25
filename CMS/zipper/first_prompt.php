@@ -6,20 +6,9 @@
 	<link rel="stylesheet" href="zipper.css">
 </head>
 <body>
-	<div class="container center">
-		<div class="instruction prompt">Look at this picture taken by somebody else, then record a sound to go with it.</div>
-		
-		<?php
-			include "connect.php";
+	<div class="container">
+		<div class="instruction prompt">You are first! You can initiate today's video with a sound. Find something nearby, and then press the arrow to record it.</div>
 
-			$sql = "SELECT * FROM files WHERE type='image' ORDER BY id DESC LIMIT 1";
-			$result = $conn->query($sql);
-
-			while ($row = $result->fetch_assoc()) {
-	          echo "<img class='prompt_image' src='images/{$row['id']}/{$row['filename']}'>";
-	      }
-		?>
-		
 		<a href="audio.php">
 			<div class="button">
 				<?php include "arrow.html"; ?>
@@ -30,7 +19,6 @@
 <script> 		
 	$( document ).ready(function() {
 	    var colors = ['AntiqueWhite', 'CadetBlue', 'Chartreuse', 'DarkSeaGreen', 'LightSteelBlue', 'Lavender', 'Thistle', 'MistyRose', 'OrangeRed', 'Yellow','RosyBrown', 'Peru'];
-
 		var max = colors.length;
 		
 		function getRandomInt(max) {

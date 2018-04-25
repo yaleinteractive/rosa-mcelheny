@@ -1,26 +1,58 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>Example 3</title>
+	<title>zipper</title>
+	<link rel="icon" href="assets/icon.png" type="image/gif" sizes="32x32">
 	<link rel="stylesheet" href="zipper.css">
 </head>
 <body>
-	<div class="container">
+	<div class="container center">
 		<audio class="placeholder" controls type="audio/mpeg"></audio>
-		<br>
-		<button class="button js-start">Start</button>
-		<button class="button js-stop" disabled>Stop</button>
-		<br>
-	 	<br>
+
+		<div class="button js-start">Start</div>
+		<div class="button js-stop">Stop</div>
+
+		<div class="greeting hide">Add your sound!</div>
+		<a href='archive.php'>
+			<div class="button hide">
+				<?php include "arrow.html"; ?>
+			</div>
+		</a>
 	</div>
 
 <script src="js/Mp3LameEncoder.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script class="containerScript">
+	
+	$( document ).ready(function() {
+	    var colors = ['AntiqueWhite', 'CadetBlue', 'Chartreuse', 'DarkSeaGreen', 'LightSteelBlue', 'Lavender', 'Thistle', 'MistyRose', 'OrangeRed', 'Yellow','RosyBrown', 'Peru'];
+		var max = colors.length;
+		function getRandomInt(max) {
+		  return Math.floor(Math.random() * Math.floor(max));
+		}
+		i = (getRandomInt(max));
+		color = colors[i];
+		$('body').css('background-color', color);
+	});
+
+	var colors;
+	 var audio_colors = function() {
+            var colors = ['AntiqueWhite', 'CadetBlue', 'Chartreuse', 'DarkSeaGreen', 'LightSteelBlue', 'Lavender', 'Thistle', 'MistyRose', 'Yellow','RosyBrown', 'Peru'];
+            var max = colors.length;  
+            function getRandomInt(max) {
+              return Math.floor(Math.random() * Math.floor(max));
+            }
+            i = (getRandomInt(max));
+            color = colors[i];
+            $('body').css('background-color', color);
+            console.log(color)
+        };
+
+    $('.hide').hide();
+
 	window.URL = window.URL || window.webkitURL;
 	/** 
-	 * Detecte the correct AudioContext for the browser 
+	 * Detect the correct AudioContext for the browser 
 	 * */
 	window.AudioContext = window.AudioContext || window.webkitAudioContext;
 	navigator.getUserMedia  = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
@@ -28,7 +60,9 @@
 	let startBtn = document.querySelector('.js-start');
 	let stopBtn = document.querySelector('.js-stop');
 	startBtn.onclick = recorder.startRecord;
+						// setTimeout(recorder.stopRecord, 4000)
 	stopBtn.onclick = recorder.stopRecord;
+
 
 	function RecordVoiceAudios() {
 		let audioElement = document.querySelector('audio');
@@ -45,6 +79,7 @@
 
 		this.startRecord = function() {
 			audioContext = new AudioContext();
+			colors = setInterval(audio_colors, 100);
 			/** 
 			* Create a ScriptProcessorNode with a bufferSize of 
 			* 4096 and two input and output channel 
@@ -68,6 +103,7 @@
 			// for buttons
 			startBtn.style.display = "none";
 			stopBtn.style.display = "flex";
+
 		};
 
 		let getBuffers = (event) => {
@@ -78,8 +114,8 @@
 		}
 
 		let gotStreamMethod = (stream) => {
-			startBtn.setAttribute('disabled', true);
-			stopBtn.removeAttribute('disabled');
+			// startBtn.setAttribute('disabled', true);
+			// stopBtn.removeAttribute('disabled');
 			audioElement.src = "";
 			config = {
 				bufferLen: 4096,
@@ -108,8 +144,8 @@
 			stopBtnRecord = () => {
 				console.log('stopBtnRecord');
 				isRecording = false;
-				startBtn.removeAttribute('disabled');
-				stopBtn.setAttribute('disabled', true);
+				// startBtn.removeAttribute('disabled');
+				// stopBtn.setAttribute('disabled', true);
 				audioContext.close();
 				processor.disconnect();
 				tracks.forEach(track => track.stop());
@@ -126,14 +162,17 @@
 					// alert('MP3 upload complete: ' + result);
 				}
 			    xhr.send(blob);
-
 			};
-
 		}
 
+
 		this.stopRecord = function() {
+			clearInterval(colors);
 			stopBtnRecord();
-			window.location = "archive.php";
+			console.log('done');
+			$('.js-stop').hide();
+			$('.hide').show();
+			// window.location = "archive.php";
 		};
 
 		let logError = (error) => {

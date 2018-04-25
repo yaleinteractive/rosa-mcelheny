@@ -1,0 +1,37 @@
+1. Index.php
+	- greeting. Links to prompt.php
+2. prompt.php
+	- analyzes last row from db
+	- if last row was added on a day that is not current day, page includes first_prompt.php
+	- if last post was made on the same day, then page considers the last uploaded type
+		- if image, includes to audio_prompt.php
+		- if audio, includes to image_prompt.php
+3. audio_prompt.php
+	- shows last image uploaded from DB. links to audio.php
+4. audio.php
+	- records sound in the browser as blob
+	- when stop button is pressed, sends blob to upload_audio.php
+5. upload_audio.php
+	- inserts row for new audio. 
+	- uploads blob to sounds folder with ID of new row.
+6. image_prompt.php
+	- displays last audio uploaded to DB. includes file upload form triggered when you click the button
+	- passes file to upload_image.php
+7. upload_image.php
+	- uploads image to server in images folder
+	- makes new row in database
+8. archive.php
+	- shows all posts with the current day, plays backwards. when finished playing, goes to archive_index.php
+9. archive_index.php
+	- displays link to archive feed for each day's posts.
+	- also links back to index.
+10. connect.php
+	- connects to DB Zipper, with table called files
+	- table structure:
+		Files
+			- id - int - auto increment
+			- type - varchar - either 'image' of 'audio'
+			- filename - varchar
+			- date - date; submitted when uploading new file, not automatic within mysql.
+11. zipper.css
+	- all css styles for site.

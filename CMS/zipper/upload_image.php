@@ -1,12 +1,15 @@
 <?php
 
+    date_default_timezone_set("America/New_York");
+
     include "connect.php";
 
     $type = "image";
     $image = basename($_FILES['image']['name']);
+   $today = date("Y-m-d");
 
     if ($type) {
-		$sql = "INSERT INTO files (type, filename) VALUES ('$type', '$image')";
+		$sql = "INSERT INTO files (type, filename, date) VALUES ('$type', '$image', '$today')";
 		$result = $conn->query($sql);
 	}
 

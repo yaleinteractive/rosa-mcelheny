@@ -1,5 +1,7 @@
 <html>
 <head>
+	<title>zipper</title>
+	<link rel="icon" href="assets/icon.png" type="image/gif" sizes="32x32">
 	<link rel="stylesheet" href="zipper.css">
 </head>
 

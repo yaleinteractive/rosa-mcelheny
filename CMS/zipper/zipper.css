@@ -3,38 +3,83 @@
 }
 
 @font-face {
-  font-family: "Monosten";
-  src: url("assets/Monosten A.ttf");
+  font-family: "Arial Narrow";
+  src: url("assets/Arial Narrow.ttf");
+}
+
+a {
+	text-decoration: none;
 }
 
 .container {
 	width:100vw;
 	height:100vh;
+	position:fixed;
 	display:flex;
 	flex-direction:column;
 	align-items:center;
-	justify-content: space-around;
+	justify-content: center;
 }
 
-.instruction {
-	font-family:"Monosten";
-	width:300px;
-	margin:0px 20px 20px 20px;
+.index {
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	justify-content: center;
+/*	margin-bottom:1000px;*/
+}
+
+.instruction, .greeting {
+	font-family:"Arial Narrow";
+	font-size:40px;
+	width:425px;
+	margin:20px;
 	text-align:center;
 }
 
+.greeting {
+	width:405px;
+}
+
 .button {
-	font-family:"Monosten";
+	font-family:"Arial Narrow";
     border: 2px dashed red;
     border-radius: 50%;
     height: 100px;
     width: 100px;
 	margin:20px;
+	font-size:40px;
 	display:flex;
 	flex-direction:column;
 	align-items:center;
 	justify-content: center;
 	cursor:pointer;
+}
+
+.index_link {
+	position:relative;
+}
+
+.index_link .arrow {
+    position: absolute;
+    top: 49px;
+    left: 40px;
+}
+
+.rotate {
+	animation-name:rotate;
+	animation-duration:30s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes rotate {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
 }
 
 /*for images on the audio prompt page*/
@@ -48,6 +93,11 @@ audio {
 	display:none;
 }
 
+.date {
+	z-index:500;
+	color:black;
+}
+
 .audio_prompt {
 	display:block;
 	padding:20px;
@@ -59,6 +109,7 @@ audio {
 	color:white;
 }
 
+/*for arrow*/
 .arrow {
 	width:64px;
 	height:50px;
@@ -89,11 +140,11 @@ audio {
     top: 33px;
 }
 
-
+/*for blue audio box*/
 .audio {
 	background-color:blue;
-	width:800px;
-	height:800px;
+	width:550px;
+	height:550px;
 	margin:20px;
 	display: flex;
     flex-direction: column;
@@ -129,10 +180,10 @@ audio {
 /*for play button on archive page*/
 .play {
     position:fixed;
-    top:0;
-    left:0;
-    width:100vw;
-    height:100vh;
+    top:40%;
+    left:40%;
+    /*width:100vw;
+    height:100vh;*/
     display:flex;
     flex-direction:column;
     align-items: center;
@@ -147,9 +198,24 @@ audio {
 	object-fit:cover;
 }
 
+/*for archive page exit button*/
+.exit {
+	position: fixed;
+    top: 37px;
+    right: 14px;
+}
+
+.exit .diag {
+	top:0px;
+}
+
 #form {
 	position:fixed;
 	top:-1000px;
+}
+
+.red {
+	background-color:red;
 }
 
 @media only screen 
@@ -157,59 +223,93 @@ audio {
   and (max-device-width: 667px) 
   and (-webkit-min-device-pixel-ratio: 2) { 
 
+  	body {
+  		margin:none;
+  		/*overflow-y:hidden;*/
+  	}
+  	.container {
+	    justify-content: flex-start;
+	    height:88vh; 
+/*	    border:1px red solid;*/
+	    top:0vh;
+  	}
+  	.center {
+  		justify-content:center;
+  	}
+  	.greeting {
+  		width:750px;
+  		font-size:103px;
+	    margin: 0px 20px 20px 20px;
+  	}
   	.instruction {
   		width:750px;
-  		font-size:80px;
+  		font-size:69px;
+  		/*line-height:100px;*/
+	    margin: 20px;
   	}
-
-  	.prompt {
-  		font-size:40px;
-  	}
-
   	.button {
   		width:300px;
   		height:300px;
+  		border-width:6px;
+  		    font-size: 100px;
   	}
-
   	.arrow {
 		width:163px;
 		height:200px;
-		position:relative;
+	}
+
+	.index_link .arrow {
+	    top: 72px;
+	    left: 82px;
 	}
 
 	.line {
 		position: absolute;
 		width: 100%;
-		height: 4px;
+		height: 5px;
 		top: 98px;
 		background-color: red;
 		z-index: 100;
 	}
-
 	.diag {
        	position: absolute;
 	    width: 75px;
-	    height: 4px;
+	    height: 5px;
 	    transform: rotate(45deg);
 	    top: 70px;
 	    right: -8px;
 	    background-color: red;
 	}
-
 	.down {
 		transform:rotate(-45deg);
 	    top: 126px;
 	}
-
 	.audio_prompt {
 		display:block;
 		margin-bottom:200px;
 		margin-left:200px;
 	}
-
 	.prompt_image {
-		width:700px;
+		width:initial;
+		height:700px;
 		margin:20px 0px 20px 0px;
 	}
+	.audio {
+		height:600px;
+		width:800px;
+	    margin: 40px 20px 40px 20px;
+	}
 
+	.instruction {
+		margin:0px 0px 40px 0px;
+	}
+	.archive {
+		width:100vw;
+		height:100vh;
+		margin:0px;
+		display:none;
+	}
+		button {
+			font-size:103px;
+		}
 }
