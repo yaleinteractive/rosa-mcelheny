@@ -8,14 +8,15 @@
 <body class='archive_page'>
 
 
+    <a class='exit' href='archive_index.php'>
+        <div class="diag"></div>
+        <div class="diag down"></div>
+    </a>
 
     <div class="play">
         <div class='instruction'>Play it back!</div>
-
        <div class="playbutton">
-<!--             <div class="button"> -->
                 <div class='arrow-right'></div>
-<!--             </div> -->
         </div>
     </div>
 
@@ -82,7 +83,8 @@
                 var items = $( ".archive" ).toArray();
                 var number = items.length;
                 console.log(number);
-
+                // change the color of audio files.
+                audio_colors();
                 // if there is at least one archive item, do this function
                     if (number >= 1) {
                         var $item = $('.content .archive').first();
@@ -110,8 +112,9 @@
                     }
                 }
 
-                $('.play').click( function(){
-                    $(this).hide();
+                $('.playbutton').click( function(){
+                    $('.play').hide();
+                    $('.exit').show();
                     next_item();
                 });
             } 
@@ -144,8 +147,9 @@
                 }
             }
 
-            $('.play').click( function(){
-                $(this).hide();
+            $('.playbutton').click( function(){
+                $('.play').hide();
+                $('.exit').show();
                 next_item();
             });
         }

@@ -188,8 +188,12 @@ audio {
     justify-content: center;
 }
 
-.playbutton {
+.play .playbutton {
 	transform:rotate(180deg);
+}
+
+.play .instruction {
+	color:white;
 }
 
 /*for images on the archive page*/
@@ -202,13 +206,16 @@ audio {
 
 /*for archive page exit button*/
 .exit {
+	cursor:pointer;
+	display:none;
 	position: fixed;
-    top: 37px;
+    top: 71px;
     right: 14px;
 }
 
 .exit .diag {
 	top:0px;
+	width:150px;
 }
 
 #form {
